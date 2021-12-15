@@ -64,4 +64,21 @@ class CalUseCaseTest {
 //        verify(calUseCase).invoke(calStr)
         assertEquals(15, result)
     }
+
+    @Test
+    fun `호환되지 않은 연산자 테스트`() {
+        try {
+            /* Given */
+            val calStr = "3 테스트 5"
+
+            /* When */
+            val result = calUseCase.invoke(calStr)
+
+            /* Then */
+//        verify(calUseCase).invoke(calStr)
+            assertEquals(15, result)
+        } catch (e: NullPointerException) {
+            assertEquals("테스트 연산자는 없습니다.", e.message)
+        }
+    }
 }
