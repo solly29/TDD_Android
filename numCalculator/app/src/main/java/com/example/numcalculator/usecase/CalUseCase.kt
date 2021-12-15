@@ -2,7 +2,22 @@ package com.example.numcalculator.usecase
 
 class CalUseCase: UseCase<String, Int>() {
     override fun run(parm: String): Int {
-        val strList = parm.split("더하기")
-        return strList[0].toInt() + strList[1].toInt()
+        return parm.split(" ").let {
+            when(it[1]) {
+                "더하기" -> {
+                    it[0].toInt() + it[2].toInt()
+                }
+                "빼기" -> {
+                    it[0].toInt() - it[2].toInt()
+                }
+                "곱하기" -> {
+                    it[0].toInt() * it[2].toInt()
+                }
+                "나누기" -> {
+                    it[0].toInt() / it[2].toInt()
+                }
+                else -> throw Error("연산자 오류")
+            }
+        }
     }
 }
