@@ -15,7 +15,7 @@ class CalUseCaseTest {
     @Test
     fun `문자열로 계산하는 더하기 테스트`() {
         /* Given */
-        val calStr = "1 더하기 1"
+        val calStr = "1 + 1"
 
         /* When */
         val result = calUseCase.invoke(calStr)
@@ -29,7 +29,7 @@ class CalUseCaseTest {
     @Test
     fun `문자열로 계산하는 빼기 테스트`() {
         /* Given */
-        val calStr = "2 빼기 1"
+        val calStr = "2 - 1"
 
         /* When */
         val result = calUseCase.invoke(calStr)
@@ -42,7 +42,7 @@ class CalUseCaseTest {
     @Test
     fun `문자열로 계산하는 나누기 테스트`() {
         /* Given */
-        val calStr = "4 나누기 2"
+        val calStr = "4 / 2"
 
         /* When */
         val result = calUseCase.invoke(calStr)
@@ -55,7 +55,7 @@ class CalUseCaseTest {
     @Test
     fun `문자열로 계산하는 곱하기 테스트`() {
         /* Given */
-        val calStr = "3 곱하기 5"
+        val calStr = "3 * 5"
 
         /* When */
         val result = calUseCase.invoke(calStr)
@@ -75,10 +75,22 @@ class CalUseCaseTest {
             val result = calUseCase.invoke(calStr)
 
             /* Then */
-//        verify(calUseCase).invoke(calStr)
+//            verify(calUseCase).invoke(calStr)
             assertEquals(15, result)
         } catch (e: NullPointerException) {
             assertEquals("테스트 연산자는 없습니다.", e.message)
         }
+    }
+
+    @Test
+    fun `실수 계산 테스트`() {
+        /* Given */
+        val calStr = "3 / 7"
+
+        /* When */
+        val result = calUseCase.invoke(calStr)
+
+        /* Then */
+        assertEquals(0.4285, result)
     }
 }
