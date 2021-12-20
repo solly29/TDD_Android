@@ -5,6 +5,7 @@ import kotlin.math.roundToInt
 
 class CalUseCase: UseCase<String, Number>() {
     override fun run(parm: String): Number {
+
         return parm.split(" ").let {
             Operation.find(it[1]).calculate(it[0], it[2]).toRound()
         }

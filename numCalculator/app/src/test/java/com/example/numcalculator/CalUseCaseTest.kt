@@ -93,4 +93,19 @@ class CalUseCaseTest {
         /* Then */
         assertEquals(0.4285, result)
     }
+
+    @Test
+    fun `여러개 연산자 테스트`() {
+        /* Given */
+        val calStr = "1 + 2 + 4"
+        val calStr2 = "1 * 2 * 6 + 2"
+
+        /* When */
+        val result = calUseCase.invoke(calStr)
+        val result2 = calUseCase.invoke(calStr2)
+
+        /* Then */
+        assertEquals(7, result)
+        assertEquals(14, result2)
+    }
 }
