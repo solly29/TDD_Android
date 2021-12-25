@@ -27,7 +27,7 @@ class MainViewModelTest {
         viewModel.addFormulaText(text2)
 
         /* Then */
-        val result = viewModel.formulaStr
-        assertEquals(result.toString(), StringBuffer("1+").toString())
+        val result = viewModel.formulaStrLiveData.value
+        assertEquals(result.toString(), "1+")
     }
 }

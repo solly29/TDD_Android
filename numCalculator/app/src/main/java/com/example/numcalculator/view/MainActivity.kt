@@ -13,7 +13,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     override val viewModel = MainViewModel()
 
     override fun initStartView() {
-
+        binding.viewmodel = viewModel
     }
 
     override fun initDataBinding() {

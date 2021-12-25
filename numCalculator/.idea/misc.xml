@@ -7,7 +7,7 @@
         <entry key="app/src/main/res/drawable/cal_button_background2.xml" value="0.23645833333333333" />
         <entry key="app/src/main/res/drawable/cal_button_selector.xml" value="0.23645833333333333" />
         <entry key="app/src/main/res/layout/activity_intro.xml" value="0.17777777777777778" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.17777777777777778" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
       </map>
     </option>
   </component>

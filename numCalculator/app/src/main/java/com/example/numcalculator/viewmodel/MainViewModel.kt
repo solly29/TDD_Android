@@ -1,14 +1,16 @@
 package com.example.numcalculator.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 class MainViewModel: BaseViewModel() {
 
-    val formulaStr = StringBuffer()
-//    val formulaStr: String get() = _formulaStr.toString()
+    private val _formulaStrLivaData = MutableLiveData("")
+    val formulaStrLiveData: LiveData<String>
+        get() = _formulaStrLivaData
 
     fun addFormulaText(str: String) {
-        formulaStr.append(str)
+        _formulaStrLivaData.value = _formulaStrLivaData.value + " " + str
     }
 }
