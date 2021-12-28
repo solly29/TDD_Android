@@ -29,4 +29,8 @@ class MainViewModel: BaseViewModel() {
             _formulaStrLivaData.value = _formulaStrLivaData.value + " = " + resultLiveData.value
         }
     }
+
+    fun clearFormulaText() {
+        _formulaStrLivaData.value = ""
+    }
 }
