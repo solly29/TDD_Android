@@ -30,4 +30,15 @@ class MainViewModelTest {
         val result = viewModel.formulaStrLiveData.getOrAwaitValue()
         assertEquals(result, "1 +")
     }
+
+    @Test
+    fun `문자열 계산 테스트`() {
+        val str = "1 + 2 + 3"
+
+        viewModel.addFormulaText(str)
+        viewModel.formulaResult()
+
+        val result = viewModel.resultLiveData.getOrAwaitValue()
+        assertEquals(result, "6")
+    }
 }
