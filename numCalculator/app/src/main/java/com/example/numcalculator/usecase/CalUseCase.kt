@@ -20,7 +20,8 @@ enum class Operation(val operation: String, val calculate: (Double, Double) -> D
     PLUS("+", {num1, num2 -> num1 + num2}),
     MINUS("-", {num1, num2 -> num1 - num2}),
     PRODUCT("*", {num1, num2 -> num1 * num2}),
-    DIVIDE("/", {num1, num2 -> num1 / num2});
+    DIVIDE("/", {num1, num2 -> num1 / num2}),
+    REMAINDER("%", {num1, num2 -> num1 % num2});
 
     companion object {
         fun find(operation: String): Operation {

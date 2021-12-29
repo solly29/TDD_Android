@@ -28,7 +28,7 @@ class MainViewModelTest {
 
         /* Then */
         val result = viewModel.formulaStrLiveData.getOrAwaitValue()
-        assertEquals(result, "1 +")
+        assertEquals(result, "1 + ")
     }
 
     @Test
@@ -50,6 +50,18 @@ class MainViewModelTest {
         viewModel.clearFormulaText()
 
         val result = viewModel.formulaStrLiveData.getOrAwaitValue()
-        assertEquals(result, "")
+        assertEquals(result, null)
+    }
+
+    @Test
+    fun `계산기 숫자 입력 테스트`() {
+        val num = "1"
+        val num2 = "2"
+
+        viewModel.addFormulaNumber(num)
+        viewModel.addFormulaNumber(num2)
+
+        val result = viewModel.formulaStrLiveData.getOrAwaitValue()
+        assertEquals(result, "12")
     }
 }
