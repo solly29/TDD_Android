@@ -41,9 +41,9 @@ fun Number.toRound(): Number {
     return if(num == 0.0) toLong() else round(toDouble() * 1000) / 1000
 }
 
-fun String.toTypeCasting(): Number? {
+fun String?.toTypeCasting(): Number? {
     return try {
-        toDouble()
+        this?.toDouble()
     } catch (e: NumberFormatException) {
         Log.e("String.toTypeCasting", "${this}는 숫자가 아닙니다.")
         null
