@@ -1,124 +1,78 @@
 package com.example.numcalculator
 
+import com.example.numcalculator.model.CalNumberData
+import com.example.numcalculator.model.Operation
 import com.example.numcalculator.usecase.CalUseCase
-import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mockito.verify
-import org.mockito.junit.MockitoJUnitRunner
 
+/**
+ * 계산 유즈케이스 테스트
+ */
 class CalUseCaseTest {
 
-    private val calUseCase = CalUseCase()
-
     @Test
-    fun `문자열로 계산하는 더하기 테스트`() {
-        /* Given */
-        val calStr = "11 + 11"
+    fun `1 + 1 = 2를 테스트하는 테스트케이스`() {
+        val useCase = CalUseCase()
+        val num1 = 1
+        val num2 = 1
+        val operationStr = "+"
+        val operation = Operation.findOperation(operationStr)
 
-        /* When */
-        val result = calUseCase.invoke(calStr)
+        val result = useCase.invoke(CalNumberData(num1, num2, operation))
 
-        /* Then */
-//        verify(calUseCase).invoke(calStr)
-        assertEquals(22, result)
-    }
-
-
-    @Test
-    fun `문자열로 계산하는 빼기 테스트`() {
-        /* Given */
-        val calStr = "21 - 1"
-
-        /* When */
-        val result = calUseCase.invoke(calStr)
-
-        /* Then */
-//        verify(calUseCase).invoke(calStr)
-        assertEquals(20, result)
+        assertEquals(2L, result)
     }
 
     @Test
-    fun `문자열로 계산하는 나누기 테스트`() {
-        /* Given */
-        val calStr = "40 / 2"
+    fun `3 * 3 = 9를 테스트하는 테스트케이스`() {
+        val useCase = CalUseCase()
+        val num1 = 3
+        val num2 = 3
+        val operationStr = "*"
+        val operation = Operation.findOperation(operationStr)
 
-        /* When */
-        val result = calUseCase.invoke(calStr)
+        val result = useCase.invoke(CalNumberData(num1, num2, operation))
 
-        /* Then */
-//        verify(calUseCase).invoke(calStr)
-        assertEquals(20, result)
+        assertEquals(9L, result)
     }
 
     @Test
-    fun `문자열로 계산하는 곱하기 테스트`() {
-        /* Given */
-        val calStr = "30 * 5"
+    fun `100점32 - 3 = 97를 테스트하는 테스트케이스`() {
+        val useCase = CalUseCase()
+        val num1 = 100.32
+        val num2 = 3
+        val operationStr = "-"
+        val operation = Operation.findOperation(operationStr)
 
-        /* When */
-        val result = calUseCase.invoke(calStr)
+        val result = useCase.invoke(CalNumberData(num1, num2, operation))
 
-        /* Then */
-//        verify(calUseCase).invoke(calStr)
-        assertEquals(150, result)
+        assertEquals(97.32, result)
     }
 
     @Test
-    fun `문자열로 계산하는 나머지 테스트`() {
-        /* Given */
-        val calStr = "31 % 5"
+    fun `23 나누기 2 = 11점5를 테스트하는 테스트케이스`() {
+        val useCase = CalUseCase()
+        val num1 = 23
+        val num2 = 2
+        val operationStr = "/"
+        val operation = Operation.findOperation(operationStr)
 
-        /* When */
-        val result = calUseCase.invoke(calStr)
+        val result = useCase.invoke(CalNumberData(num1, num2, operation))
 
-        /* Then */
-//        verify(calUseCase).invoke(calStr)
-        assertEquals(1, result)
+        assertEquals(11.5, result)
     }
 
     @Test
-    fun `호환되지 않은 연산자 테스트`() {
-        try {
-            /* Given */
-            val calStr = "3 테스트 5"
+    fun `23 % 2 = 1를 테스트하는 테스트케이스`() {
+        val useCase = CalUseCase()
+        val num1 = 23
+        val num2 = 2
+        val operationStr = "%"
+        val operation = Operation.findOperation(operationStr)
 
-            /* When */
-            val result = calUseCase.invoke(calStr)
+        val result = useCase.invoke(CalNumberData(num1, num2, operation))
 
-            /* Then */
-//            verify(calUseCase).invoke(calStr)
-            assertEquals(15, result)
-        } catch (e: NullPointerException) {
-            assertEquals("테스트 연산자는 없습니다.", e.message)
-        }
-    }
-
-    @Test
-    fun `실수 계산 테스트`() {
-        /* Given */
-        val calStr = "3 / 7"
-
-        /* When */
-        val result = calUseCase.invoke(calStr)
-
-        /* Then */
-        assertEquals(0.4285, result)
-    }
-
-    @Test
-    fun `여러개 연산자 테스트`() {
-        /* Given */
-        val calStr = "1 + 2 + 4"
-        val calStr2 = "1 * 2 * 6 + 2"
-
-        /* When */
-        val result = calUseCase.invoke(calStr)
-        val result2 = calUseCase.invoke(calStr2)
-
-        /* Then */
-        assertEquals(7, result)
-        assertEquals(14, result2)
+        assertEquals(1L, result)
     }
 }
