@@ -160,4 +160,23 @@ class MainViewModelTest {
 
         assertEquals("", result)
     }
+
+    @Test
+    fun `=으로 계산 후 - 연산자 입력 테스트`() {
+        val viewModel = MainViewModel()
+        viewModel.addFormulaNum("1")
+        viewModel.addFormulaOperation("+")
+        viewModel.addFormulaNum("2")
+        viewModel.addFormulaResult()
+
+        viewModel.addFormulaOperation("-")
+
+        val operation = viewModel.operationLiveData.getOrAwaitValue()
+        val formula = viewModel.formulaLiveData.getOrAwaitValue()
+        val result = viewModel.resultLiveData.getOrAwaitValue()
+
+        assertEquals("-", operation)
+        assertEquals("1 + 2 = 3", formula)
+        assertEquals("3", result)
+    }
 }

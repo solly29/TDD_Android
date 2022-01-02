@@ -38,16 +38,19 @@ class MainViewModel: BaseViewModel() {
 
     fun addFormulaOperation(operation: String) {
         formulaResult?.let { num1 ->
-            val calNumberData = resultLiveData.value.toTypeCasting()?.let { num2 ->
-                val op = Operation.findOperation(operationLiveData.value ?: "")
-                CalNumberData(num1, num2, op)
+            if(operationLiveData.value != "=") {
+                val calNumberData = resultLiveData.value.toTypeCasting()?.let { num2 ->
+                    val op = Operation.findOperation(operationLiveData.value ?: "")
+                    CalNumberData(num1, num2, op)
+                }
+
+                formulaResult = calNumberData?.let {
+                    useCase.invoke(it)
+                } ?: return@let
+
+                formula += " ${operationLiveData.value} ${resultLiveData.value}"
             }
 
-            formulaResult = calNumberData?.let {
-                useCase.invoke(it)
-            } ?: return@let
-
-            formula += " ${operationLiveData.value} ${resultLiveData.value}"
             _formulaLiveData.value = "$formula = $formulaResult"
             _resultLiveData.value = formulaResult.toString()
         } ?: run{
@@ -60,20 +63,23 @@ class MainViewModel: BaseViewModel() {
     }
 
     fun addFormulaResult() {
-        formulaResult?.let {
-            val calNumberData = resultLiveData.value.toTypeCasting()?.let { num2 ->
-                val op = Operation.findOperation(operationLiveData.value ?: "")
-                CalNumberData(it , num2, op)
+        if(operationLiveData.value != "=") {
+            formulaResult?.let {
+                val calNumberData = resultLiveData.value.toTypeCasting()?.let { num2 ->
+                    val op = Operation.findOperation(operationLiveData.value ?: "")
+                    CalNumberData(it , num2, op)
+                }
+
+                formulaResult = calNumberData?.let {
+                    useCase.invoke(it)
+                } ?: return@let
             }
 
-            formulaResult = calNumberData?.let {
-                useCase.invoke(it)
-            } ?: return@let
+            formula = "$formula ${operationLiveData.value} ${resultLiveData.value}"
+            _formulaLiveData.value = formula
+            _operationLiveData.value = "="
+            _resultLiveData.value = formulaResult.toString()
         }
-
-        _formulaLiveData.value = "$formula ${operationLiveData.value} ${resultLiveData.value}"
-        _operationLiveData.value = "="
-        _resultLiveData.value = formulaResult.toString()
     }
 
     fun clearFormula() {
