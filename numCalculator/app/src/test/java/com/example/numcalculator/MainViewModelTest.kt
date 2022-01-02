@@ -179,4 +179,31 @@ class MainViewModelTest {
         assertEquals("1 + 2 = 3", formula)
         assertEquals("3", result)
     }
+
+    @Test
+    fun `모든 계산식, 숫자 초기화`() {
+        val viewModel = MainViewModel()
+        viewModel.addFormulaNum("1")
+        viewModel.addFormulaNum("2")
+        viewModel.addFormulaNum("7")
+        viewModel.addFormulaOperation("+")
+        viewModel.addFormulaNum("2")
+        viewModel.addFormulaNum("4")
+        viewModel.addFormulaOperation("-")
+        viewModel.addFormulaNum("1")
+        viewModel.addFormulaNum("4")
+
+        viewModel.clearFormula()
+        viewModel.clearFormula()
+
+        val operString = viewModel.operString.getOrAwaitValue()
+        val operation = viewModel.operationLiveData.getOrAwaitValue()
+        val formula = viewModel.formulaLiveData.getOrAwaitValue()
+        val result = viewModel.resultLiveData.getOrAwaitValue()
+
+        assertEquals("AC", operString)
+        assertEquals("", operation)
+        assertEquals("", formula)
+        assertEquals("", result)
+    }
 }
