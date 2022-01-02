@@ -146,4 +146,18 @@ class MainViewModelTest {
         assertEquals("1 + 2", formula)
         assertEquals("3", result)
     }
+
+    @Test
+    fun `현재 입력된 숫자 초기화`() {
+        val viewModel = MainViewModel()
+        viewModel.addFormulaNum("1")
+        viewModel.addFormulaNum("2")
+        viewModel.addFormulaNum("3")
+
+        viewModel.clearFormula()
+
+        val result = viewModel.resultLiveData.getOrAwaitValue()
+
+        assertEquals("", result)
+    }
 }

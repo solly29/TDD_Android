@@ -94,7 +94,8 @@
                 android:textSize="45dp"
                 android:textColor="@color/black"
                 android:background="@drawable/cal_button_background"
-                android:backgroundTint="#9F9F9F"/>
+                android:backgroundTint="#9F9F9F"
+                android:onClick="@{() -> viewmodel.clearFormula()}"/>
 
             <Button
                 android:layout_width="0dp"

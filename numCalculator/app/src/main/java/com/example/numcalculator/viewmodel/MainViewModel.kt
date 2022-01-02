@@ -75,4 +75,8 @@ class MainViewModel: BaseViewModel() {
         _operationLiveData.value = "="
         _resultLiveData.value = formulaResult.toString()
     }
+
+    fun clearFormula() {
+        _resultLiveData.value = ""
+    }
 }
