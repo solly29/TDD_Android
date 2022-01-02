@@ -9,7 +9,6 @@
         <variable
             name="viewmodel"
             type="com.example.numcalculator.viewmodel.MainViewModel" />
-
         <import type="android.widget.Button"/>
     </data>
 
@@ -19,6 +18,17 @@
         tools:context=".view.MainActivity"
         android:background="@color/black">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewmodel.formulaLiveData}"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:gravity="end|bottom"
+            app:layout_constraintBottom_toBottomOf="@+id/result_guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/result_guideline"
             android:orientation="horizontal"
@@ -27,16 +37,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:textSize="40dp"
-            android:textColor="@color/white"
-            android:gravity="right|center"
+            android:orientation="horizontal"
             app:layout_constraintTop_toTopOf="@+id/result_guideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/gride_text_guideline"/>
+            app:layout_constraintBottom_toTopOf="@id/gride_text_guideline">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:textSize="45dp"
+                android:textColor="@color/white"
+                android:text="@{viewmodel.operationLiveData}"
+                android:gravity="start|bottom"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="@{viewmodel.resultLiveData}"
+                android:textSize="40dp"
+                android:layout_weight="0.9"
+                android:textColor="@color/white"
+                android:gravity="end|center"/>
+
+        </LinearLayout>
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gride_text_guideline"
@@ -85,7 +114,8 @@
                 android:text="%"
                 android:textSize="45dp"
                 android:background="@drawable/cal_button_background"
-                android:backgroundTint="#9F9F9F"/>
+                android:backgroundTint="#9F9F9F"
+                android:onClick="@{(e) -> viewmodel.addFormulaOperation(((Button)e).text.toString())}"/>
 
             <Button
                 android:layout_width="0dp"
@@ -96,7 +126,8 @@
                 android:textSize="45dp"
                 android:textColor="@color/white"
                 android:background="@drawable/cal_button_background"
-                android:backgroundTint="#F8A62D"/>
+                android:backgroundTint="#F8A62D"
+                android:onClick="@{(e) -> viewmodel.addFormulaOperation(((Button)e).text.toString())}"/>
 
             <Button
                 android:layout_width="0dp"
@@ -106,7 +137,8 @@
                 android:text="1"
                 android:textSize="45dp"
                 android:textColor="@color/white"
-                android:background="@drawable/cal_button_background"/>
+                android:background="@drawable/cal_button_background"
+                android:onClick="@{(e) -> viewmodel.addFormulaNum(((Button)e).text.toString())}"/>
 
             <Button
                 android:layout_width="0dp"
@@ -116,7 +148,8 @@
                 android:text="2"
                 android:textSize="45dp"
                 android:textColor="@color/white"
-                android:background="@drawable/cal_button_background"/>
+                android:background="@drawable/cal_button_background"
+                android:onClick="@{(e) -> viewmodel.addFormulaNum(((Button)e).text.toString())}"/>
 
             <Button
                 android:layout_width="0dp"
@@ -126,7 +159,8 @@
                 android:text="3"
                 android:textSize="45dp"
                 android:textColor="@color/white"
-                android:background="@drawable/cal_button_background"/>
+                android:background="@drawable/cal_button_background"
+                android:onClick="@{(e) -> viewmodel.addFormulaNum(((Button)e).text.toString())}"/>
 
             <Button
                 android:layout_width="0dp"
@@ -137,7 +171,8 @@
                 android:textSize="45dp"
                 android:textColor="@color/white"
                 android:background="@drawable/cal_button_background"
-                android:backgroundTint="#F8A62D"/>
+                android:backgroundTint="#F8A62D"
+                android:onClick="@{(e) -> viewmodel.addFormulaOperation(((Button)e).text.toString())}"/>
 
             <Button
                 android:layout_width="0dp"
@@ -147,7 +182,8 @@
                 android:text="4"
                 android:textSize="45dp"
                 android:textColor="@color/white"
-                android:background="@drawable/cal_button_background"/>
+                android:background="@drawable/cal_button_background"
+                android:onClick="@{(e) -> viewmodel.addFormulaNum(((Button)e).text.toString())}"/>
 
             <Button
                 android:layout_width="0dp"
@@ -157,7 +193,8 @@
                 android:text="5"
                 android:textSize="45dp"
                 android:textColor="@color/white"
-                android:background="@drawable/cal_button_background"/>
+                android:background="@drawable/cal_button_background"
+                android:onClick="@{(e) -> viewmodel.addFormulaNum(((Button)e).text.toString())}"/>
 
             <Button
                 android:layout_width="0dp"
@@ -167,7 +204,8 @@
                 android:text="6"
                 android:textSize="45dp"
                 android:textColor="@color/white"
-                android:background="@drawable/cal_button_background"/>
+                android:background="@drawable/cal_button_background"
+                android:onClick="@{(e) -> viewmodel.addFormulaNum(((Button)e).text.toString())}"/>
 
             <Button
                 android:layout_width="0dp"
@@ -178,7 +216,8 @@
                 android:textSize="45dp"
                 android:textColor="@color/white"
                 android:background="@drawable/cal_button_background"
-                android:backgroundTint="#F8A62D"/>
+                android:backgroundTint="#F8A62D"
+                android:onClick="@{(e) -> viewmodel.addFormulaOperation(((Button)e).text.toString())}"/>
 
             <Button
                 android:layout_width="0dp"
@@ -188,7 +227,8 @@
                 android:text="7"
                 android:textSize="45dp"
                 android:textColor="@color/white"
-                android:background="@drawable/cal_button_background"/>
+                android:background="@drawable/cal_button_background"
+                android:onClick="@{(e) -> viewmodel.addFormulaNum(((Button)e).text.toString())}"/>
 
             <Button
                 android:layout_width="0dp"
@@ -198,7 +238,8 @@
                 android:text="8"
                 android:textSize="45dp"
                 android:textColor="@color/white"
-                android:background="@drawable/cal_button_background"/>
+                android:background="@drawable/cal_button_background"
+                android:onClick="@{(e) -> viewmodel.addFormulaNum(((Button)e).text.toString())}"/>
 
             <Button
                 android:layout_width="0dp"
@@ -208,7 +249,8 @@
                 android:text="9"
                 android:textSize="45dp"
                 android:textColor="@color/white"
-                android:background="@drawable/cal_button_background"/>
+                android:background="@drawable/cal_button_background"
+                android:onClick="@{(e) -> viewmodel.addFormulaNum(((Button)e).text.toString())}"/>
 
             <Button
                 android:layout_width="0dp"
@@ -219,7 +261,8 @@
                 android:textSize="45dp"
                 android:textColor="@color/white"
                 android:background="@drawable/cal_button_background"
-                android:backgroundTint="#F8A62D"/>
+                android:backgroundTint="#F8A62D"
+                android:onClick="@{(e) -> viewmodel.addFormulaOperation(((Button)e).text.toString())}"/>
 
             <Button
                 android:layout_width="0dp"
@@ -230,7 +273,8 @@
                 android:text="0"
                 android:textSize="45dp"
                 android:textColor="@color/white"
-                android:background="@drawable/cal_button_background2"/>
+                android:background="@drawable/cal_button_background2"
+                android:onClick="@{(e) -> viewmodel.addFormulaNum(((Button)e).text.toString())}"/>
 
             <Button
                 android:layout_width="0dp"
@@ -240,7 +284,8 @@
                 android:text="."
                 android:textSize="45dp"
                 android:textColor="@color/white"
-                android:background="@drawable/cal_button_background"/>
+                android:background="@drawable/cal_button_background"
+                android:onClick="@{(e) -> viewmodel.addFormulaNum(((Button)e).text.toString())}"/>
 
             <Button
                 android:layout_width="0dp"

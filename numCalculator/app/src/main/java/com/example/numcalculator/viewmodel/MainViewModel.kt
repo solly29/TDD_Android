@@ -23,6 +23,8 @@ class MainViewModel: BaseViewModel() {
 
     private var formulaResult: Number? = null
 
+    private var formula: String = ""
+
     private var isInputOper = false
 
     fun addFormulaNum(num: String) {
@@ -45,11 +47,12 @@ class MainViewModel: BaseViewModel() {
                 useCase.invoke(it)
             } ?: return@let
 
-
-            _formulaLiveData.value = "${formulaLiveData.value} ${operationLiveData.value} ${resultLiveData.value} = $formulaResult"
+            formula += " ${operationLiveData.value} ${resultLiveData.value}"
+            _formulaLiveData.value = "$formula = $formulaResult"
             _resultLiveData.value = formulaResult.toString()
         } ?: run{
             formulaResult = resultLiveData.value.toTypeCasting()
+            formula = resultLiveData.value ?: ""
             _formulaLiveData.value = resultLiveData.value
         }
         _operationLiveData.value = operation
