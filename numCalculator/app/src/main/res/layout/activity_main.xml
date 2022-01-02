@@ -296,7 +296,8 @@
                 android:textSize="45dp"
                 android:textColor="@color/white"
                 android:background="@drawable/cal_button_background"
-                android:backgroundTint="#F8A62D"/>
+                android:backgroundTint="#F8A62D"
+                android:onClick="@{() -> viewmodel.addFormulaResult()}"/>
 
         </GridLayout>
 

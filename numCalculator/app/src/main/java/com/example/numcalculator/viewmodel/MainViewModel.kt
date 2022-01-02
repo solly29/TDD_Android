@@ -58,4 +58,21 @@ class MainViewModel: BaseViewModel() {
         _operationLiveData.value = operation
         isInputOper = true
     }
+
+    fun addFormulaResult() {
+        formulaResult?.let {
+            val calNumberData = resultLiveData.value.toTypeCasting()?.let { num2 ->
+                val op = Operation.findOperation(operationLiveData.value ?: "")
+                CalNumberData(it , num2, op)
+            }
+
+            formulaResult = calNumberData?.let {
+                useCase.invoke(it)
+            } ?: return@let
+        }
+
+        _formulaLiveData.value = "$formula ${operationLiveData.value} ${resultLiveData.value}"
+        _operationLiveData.value = "="
+        _resultLiveData.value = formulaResult.toString()
+    }
 }

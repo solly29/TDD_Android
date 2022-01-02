@@ -128,4 +128,22 @@ class MainViewModelTest {
         assertEquals("127 + 24 - 12 = 139", formula)
         assertEquals("139", result)
     }
+
+    @Test
+    fun `1 + 2에서 =를 입력헸을때`() {
+        val viewModel = MainViewModel()
+        viewModel.addFormulaNum("1")
+        viewModel.addFormulaOperation("+")
+        viewModel.addFormulaNum("2")
+
+        viewModel.addFormulaResult()
+
+        val operation = viewModel.operationLiveData.getOrAwaitValue()
+        val formula = viewModel.formulaLiveData.getOrAwaitValue()
+        val result = viewModel.resultLiveData.getOrAwaitValue()
+
+        assertEquals("=", operation)
+        assertEquals("1 + 2", formula)
+        assertEquals("3", result)
+    }
 }
