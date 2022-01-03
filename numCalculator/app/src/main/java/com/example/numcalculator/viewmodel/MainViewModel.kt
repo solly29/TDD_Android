@@ -15,7 +15,7 @@ class MainViewModel: BaseViewModel() {
     private val _resultLiveData = MutableLiveData<String>()
     val resultLiveData: LiveData<String> get() = _resultLiveData
 
-    private val _operationLiveData = MutableLiveData<String>()
+    private val _operationLiveData = MutableLiveData<String>("")
     val operationLiveData: LiveData<String> get() = _operationLiveData
 
     private val _formulaLiveData = MutableLiveData<String>()
@@ -59,6 +59,8 @@ class MainViewModel: BaseViewModel() {
             _formulaLiveData.value = "$formula = $formulaResult"
             _resultLiveData.value = formulaResult.toString()
         } ?: run{
+            if(resultLiveData.value == null || resultLiveData.value == "")
+                return
             formulaResult = resultLiveData.value.toTypeCasting()
             formula = resultLiveData.value ?: ""
             _formulaLiveData.value = resultLiveData.value
@@ -69,7 +71,7 @@ class MainViewModel: BaseViewModel() {
 
     fun addFormulaResult() {
         _operString.value = "AC"
-        if(operationLiveData.value != "=") {
+        if(operationLiveData.value != "=" && operationLiveData.value != null && operationLiveData.value != "") {
             formulaResult?.let {
                 val calNumberData = resultLiveData.value.toTypeCasting()?.let { num2 ->
                     val op = Operation.findOperation(operationLiveData.value ?: "")
@@ -94,6 +96,7 @@ class MainViewModel: BaseViewModel() {
             _formulaLiveData.value = ""
             _resultLiveData.value = ""
             formulaResult = null
+            formula = ""
         } else if(operString.value == "C") {
             _operString.value = "AC"
             _resultLiveData.value = ""

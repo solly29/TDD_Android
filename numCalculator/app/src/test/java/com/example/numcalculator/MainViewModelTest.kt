@@ -229,4 +229,15 @@ class MainViewModelTest {
         assertEquals("1 - 2", formula)
         assertEquals("-1", result)
     }
+
+    @Test
+    fun `연산자 먼저 입력하는 테스트`() {
+        val viewModel = MainViewModel()
+
+        viewModel.addFormulaOperation("+")
+
+        val operation = viewModel.operationLiveData.getOrAwaitValue()
+
+        assertEquals("", operation)
+    }
 }
