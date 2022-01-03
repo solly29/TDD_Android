@@ -10,6 +10,8 @@ import org.junit.Test
 
 class MainViewModelTest {
 
+    // TODO +/-의 계산 로직을 추가해야됨
+
     @Rule
     @JvmField
     val rule = InstantTaskExecutorRule()
@@ -105,7 +107,6 @@ class MainViewModelTest {
         assertEquals("12", result)
     }
 
-    // TODO 여기부터 시작! 3번째 연산자 입력부터 문제가 생김
     @Test
     fun `127 + 24 - 12에서 연산자를 입력한다`() {
         val viewModel = MainViewModel()

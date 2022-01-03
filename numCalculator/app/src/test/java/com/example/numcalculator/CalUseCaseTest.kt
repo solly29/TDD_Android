@@ -11,6 +11,7 @@ import org.junit.Test
  */
 class CalUseCaseTest {
 
+    // TODO 계산식에서 연산자 우선순위를 생각하지 않고 설계함...리팩토링이 필요함
     @Test
     fun `1 + 1 = 2를 테스트하는 테스트케이스`() {
         val useCase = CalUseCase()
