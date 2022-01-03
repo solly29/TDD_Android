@@ -75,4 +75,17 @@ class CalUseCaseTest {
 
         assertEquals(1L, result)
     }
+
+    @Test
+    fun `1 - 100를 테스트하는 테스트케이스`() {
+        val useCase = CalUseCase()
+        val num1 = 1
+        val num2 = 100
+        val operationStr = "-"
+        val operation = Operation.findOperation(operationStr)
+
+        val result = useCase.invoke(CalNumberData(num1, num2, operation))
+
+        assertEquals(-99L, result)
+    }
 }

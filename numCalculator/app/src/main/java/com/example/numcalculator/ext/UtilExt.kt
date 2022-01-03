@@ -38,7 +38,7 @@ fun <T> LiveData<T>.getOrAwaitValue(
 
 fun Number.toRound(): Number {
     val num: Number = toDouble() % 1
-    return if(num == 0.0) toLong() else round(toDouble() * 1000) / 1000
+    return if(num == 0.0 || num == -0.0) toLong() else round(toDouble() * 1000) / 1000
 }
 
 fun String?.toTypeCasting(): Number? {

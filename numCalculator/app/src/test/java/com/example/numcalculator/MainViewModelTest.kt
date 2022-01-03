@@ -206,4 +206,27 @@ class MainViewModelTest {
         assertEquals("", formula)
         assertEquals("", result)
     }
+
+    @Test
+    fun `AC로 모든 계산식을 초기화 후 숫자, 연산자 입력 테스트`() {
+        val viewModel = MainViewModel()
+        viewModel.addFormulaNum("1")
+        viewModel.addFormulaOperation("+")
+        viewModel.addFormulaNum("1")
+        viewModel.addFormulaResult()
+        viewModel.clearFormula()
+
+        viewModel.addFormulaNum("1")
+        viewModel.addFormulaOperation("-")
+        viewModel.addFormulaNum("2")
+        viewModel.addFormulaResult()
+
+        val operation = viewModel.operationLiveData.getOrAwaitValue()
+        val formula = viewModel.formulaLiveData.getOrAwaitValue()
+        val result = viewModel.resultLiveData.getOrAwaitValue()
+
+        assertEquals("=", operation)
+        assertEquals("1 - 2", formula)
+        assertEquals("-1", result)
+    }
 }

@@ -93,6 +93,7 @@ class MainViewModel: BaseViewModel() {
             _operationLiveData.value = ""
             _formulaLiveData.value = ""
             _resultLiveData.value = ""
+            formulaResult = null
         } else if(operString.value == "C") {
             _operString.value = "AC"
             _resultLiveData.value = ""
