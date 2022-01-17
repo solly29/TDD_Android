@@ -102,4 +102,8 @@ class MainViewModel: BaseViewModel() {
             _resultLiveData.value = ""
         }
     }
+
+    fun addMinus() {
+        
+    }
 }

@@ -241,4 +241,22 @@ class MainViewModelTest {
 
         assertEquals("", operation)
     }
+
+    @Test
+    fun `음수 입력 테스트`() {
+        val viewModel = MainViewModel()
+
+        viewModel.addFormulaNum("1")
+        viewModel.addMinus("+/-")
+        viewModel.addFormulaOperation("+")
+        viewModel.addFormulaNum("2")
+
+        val operation = viewModel.operationLiveData.getOrAwaitValue()
+        val result = viewModel.resultLiveData.getOrAwaitValue()
+        val formula = viewModel.formulaLiveData.getOrAwaitValue()
+
+        assertEquals("+", operation)
+        assertEquals("2", result)
+        assertEquals("-1", formula)
+    }
 }
